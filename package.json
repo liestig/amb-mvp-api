@@ -1,0 +1,23 @@
+{
+  "name": "amb-mvp-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "liestiguercha",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "8.12.0",
+    "cors": "2.8.5",
+    "express": "4.18.2",
+    "jsonwebtoken": "9.0.2",
+    "morgan": "1.10.0",
+    "pg": "^8.11.3",
+    "sequelize": "6.33.0"
+  },
+  "devDependencies": {
+    "prettier": "2.8.8"
+  }
+}

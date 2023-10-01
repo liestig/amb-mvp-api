@@ -26,6 +26,10 @@ module.exports = {
         city: {
             type: 'string'
         },
+        phoneNumber: {
+            type: 'string',
+            pattern: '^0[1-9][0-9]{8}$',
+        },
         isChief: {
             type: 'boolean'
         },
@@ -40,6 +44,7 @@ module.exports = {
         'email',
         'password',
         'age',
+        'phoneNumber',
         'firstName',
         'lastName',
         'city',

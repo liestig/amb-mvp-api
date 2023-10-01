@@ -11,6 +11,12 @@ const UserModel = {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        validate: {
+            isEmail: {
+                args: true,
+                msg: "Veuillez fournir une adresse e-mail valide.",
+            },
+        },
     },
     password: {
         type: DataTypes.STRING,
@@ -19,6 +25,17 @@ const UserModel = {
     age: {
         type: DataTypes.INTEGER,
         allowNull: false,
+    },
+    phoneNumber: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            isValidPhoneNumber(value) {
+                if (!/^0[1-9][0-9]{8}$/i.test(value)) {
+                    throw new Error("Veuillez fournir un numéro de téléphone valide en France.");
+                }
+            },
+        },
     },
     role: {
         type: DataTypes.STRING,
@@ -43,9 +60,16 @@ const UserModel = {
         defaultValue: false
     },
     description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
-        defaultValue: ""
+        defaultValue: "",
+        validate: {
+            isAtLeast500Chars(value) {
+                if (value.length < 500) {
+                    throw new Error("La description doit contenir au moins 500 caractères.");
+                }
+            },
+        },
     },
     address: {
         type: DataTypes.STRING,

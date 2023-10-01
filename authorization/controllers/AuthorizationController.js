@@ -33,6 +33,7 @@ const encryptPassword = (password) => {
 };
 
 module.exports = {
+    generateAccessToken,
     register: (req, res) => {
         const payload = req.body;
 
@@ -43,21 +44,25 @@ module.exports = {
             role = roles.USER;
         }
 
+        const accessToken = generateAccessToken(payload.email, payload.id, payload.city, payload.isChief);
+
         UserModel.createUser(
             Object.assign(payload, {password: encryptedPassword, role})
         )
             .then((user) => {
+                const accessToken = generateAccessToken(user.email, user.id, user.city, user.isChief);
                 return res.status(200).json({
                     status: true,
                     data: {
                         user: user.toJSON(),
+                        token: accessToken,
                     },
                 });
             })
             .catch((err) => {
                 return res.status(500).json({
                     status: false,
-                    error: err,
+                    error: err.message,
                 });
             });
     },
@@ -108,7 +113,7 @@ module.exports = {
             .catch((err) => {
                 return res.status(500).json({
                     status: false,
-                    error: err,
+                    error: err.message,
                 });
             });
     },

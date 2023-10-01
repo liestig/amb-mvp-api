@@ -1,4 +1,5 @@
 const UserModel = require("./../../common/models/User");
+const {generateAccessToken} = require("../../authorization/controllers/AuthorizationController");
 
 module.exports = {
     getUser: (req, res) => {
@@ -18,7 +19,7 @@ module.exports = {
             .catch((err) => {
                 return res.status(500).json({
                     status: false,
-                    error: err,
+                    error: err.message,
                 });
             });
     },
@@ -44,9 +45,14 @@ module.exports = {
                 return UserModel.findUser({id: userId});
             })
             .then((user) => {
+                const accessToken = generateAccessToken(user.email, user.id, user.city, user.isChief);
+
                 return res.status(200).json({
                     status: true,
-                    data: user.toJSON(),
+                    data: {
+                        user: user.toJSON(),
+                        token: accessToken,
+                    },
                 });
             })
             .catch((err) => {
@@ -75,7 +81,7 @@ module.exports = {
             .catch((err) => {
                 return res.status(500).json({
                     status: false,
-                    error: err,
+                    error: err.message,
                 });
             });
     },
@@ -91,7 +97,7 @@ module.exports = {
             .catch((err) => {
                 return res.status(500).json({
                     status: false,
-                    error: err,
+                    error: err.message,
                 });
             });
     },
@@ -115,7 +121,7 @@ module.exports = {
             .catch((err) => {
                 return res.status(500).json({
                     status: false,
-                    error: err,
+                    error: err.message,
                 });
             });
     },

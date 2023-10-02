@@ -2,11 +2,11 @@ const {Sequelize} = require('sequelize');
 
 const sequelize = new Sequelize({
     dialect: 'postgres',
-    host: 'localhost',         // Adresse du serveur PostgreSQL
-    port: 5432,                // Port sur lequel PostgreSQL écoute
-    database: 'ambmvpapi', // Nom de la base de données à laquelle vous souhaitez vous connecter
-    username: 'me', // Nom d'utilisateur PostgreSQL
-    password: 'password', // Mot de passe PostgreSQL
+    host: 'dpg-ckdc1jesmu8c73fv94k0-a',
+    port: 5432,
+    database: 'ambrosia_app',
+    username: 'admin',
+    password: 'gfBP8rSgJcEKhFdIjiSbwOTKRETgas9Y',
     logging: console.log,
 });
 
